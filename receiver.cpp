@@ -110,7 +110,7 @@ int receive_data(void* data, size_t sz)
 			else{
 				if(numbytes < DATA_BUFFER_SIZE)
 				{
-					continue;
+					// continue;
 				}
 			}
 		}
@@ -127,7 +127,7 @@ int receive_data(void* data, size_t sz)
 			else{
 				if(numbytes < DATA_BUFFER_SIZE)
 				{
-					continue;
+					// continue;
 				}
 			}
 			break;
