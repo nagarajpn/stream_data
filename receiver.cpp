@@ -103,12 +103,32 @@ int receive_data(void* data, size_t sz)
 				perror("recvfrom");
 				exit(1);
 			}
+			else if(numbytes == 0){
+				perror("Sender disconnected");
+				//exit(1);
+			}
+			else{
+				if(numbytes < DATA_BUFFER_SIZE)
+				{
+					continue;
+				}
+			}
 		}
 		else
 		{
 			if ((numbytes = recv(new_fd, data, sz , 0)) == -1) {
 				perror("recvfrom");
 				exit(1);
+			}
+			else if(numbytes == 0){
+				perror("Sender disconnected");
+				//exit(1);
+			}
+			else{
+				if(numbytes < DATA_BUFFER_SIZE)
+				{
+					continue;
+				}
 			}
 			break;
 		}
@@ -121,17 +141,17 @@ int receive_data(void* data, size_t sz)
 	    else
 	    {
 
-			if ((numbytes = recv(new_fd, (void*)&ack, 4 , 0)) == -1) {
-				perror("recvfrom");
-				exit(1);
-			}
-			else{
-				if(ack == (sz - DATA_BUFFER_SIZE))
-				{
+			// if ((numbytes = recv(new_fd, (void*)&ack, 4 , 0)) == -1) {
+			// 	perror("recvfrom");
+			// 	exit(1);
+			// }
+			// else{
+			// 	if(ack == (sz - DATA_BUFFER_SIZE))
+			// 	{
 					data = ((unsigned char*)data) + DATA_BUFFER_SIZE;
 					sz = sz - DATA_BUFFER_SIZE;
-				}
-			}
+			// 	}
+			// }
 
 	    }
 	}

@@ -81,28 +81,40 @@ int send_data(const char* const ip_address, void* data, size_t sz)
       break;
     }
 
-    // wait(1);
-
     if ((numbytes = recv(sockfd, (void*)&ack, 4 , 0)) == -1)
     {
         perror("talker: recv..");
         return(1);
     }
-    else
     {
-      if(ack == (unsigned int)sz)
-      {
         data = ((unsigned char*)data) + DATA_BUFFER_SIZE;
         sz = sz - DATA_BUFFER_SIZE;
-
-        if ((numbytes = send(sockfd, (void*)&sz, 4 , 0)) == -1)
-        {
-            perror("talker: send..");
-            return(1);
-        }
-
-      }
     }
+
+    // for(i=0;i<10000;i++);
+
+    // wait(1);
+
+    // if ((numbytes = recv(sockfd, (void*)&ack, 4 , 0)) == -1)
+    // {
+    //     perror("talker: recv..");
+    //     return(1);
+    // }
+    // else
+    // {
+    //   if(ack == (unsigned int)sz)
+    //   {
+        // data = ((unsigned char*)data) + DATA_BUFFER_SIZE;
+        // sz = sz - DATA_BUFFER_SIZE;
+
+    //     if ((numbytes = send(sockfd, (void*)&sz, 4 , 0)) == -1)
+    //     {
+    //         perror("talker: send..");
+    //         return(1);
+    //     }
+
+    //   }
+    // }
   }
 
   freeaddrinfo(servinfo);
